@@ -5,10 +5,14 @@ class Slime{
 		this.w = w;
 		this.pos = createVector(this.x,this.y);
 		this.velocity = createVector();
-		this.acceleration = createVector(random(-1,1),random(-1,1));
+		this.acceleration = createVector(random(-0.5,0.5),random(-0.5,0.5));
+		this.energy = 10;
 	}
 
 	update = function(){
+		this.acceleration.x = random(-0.005,0.005);
+		this.acceleration.y = random(-0.005,0.005);
+
 		this.velocity.add(this.acceleration);
 		if(this.pos.x >= width - 1 || this.pos.x <= 1){
 			this.velocity.mult(-1);
@@ -22,16 +26,17 @@ class Slime{
 
 	checkDistanceFromFoodAndStop(){
 		for(let m=0;m<foodCells.length;m++){
-			let dt = int(dist(this.pos.x,this.pos.y,foodCells[m].food.x,foodCells[m].food.y));
+			let dt = int(dist(this.pos.x,this.pos.y,foodCells[m].x,foodCells[m].y));
 			if(dt == 0){
 				this.update();
 			}
-			else if(dt <= 40){
-				this.pos.x = foodCells[m].food.x;
-				this.pos.y = foodCells[m].food.y;
+			else if(dt <= 20){
+				this.pos.x = foodCells[m].x;
+				this.pos.y = foodCells[m].y;
 				this.acceleration.mult(0);
 				this.velocity.mult(0);
-				foodCells[m].food.beingEaten = true;
+				foodCells[m].beingEaten = true;
+				this.energy = this.energy + foodCells[m].energy;
 			}
 			else{
 				this.update();

@@ -1,6 +1,7 @@
 let foodCells = [];
+let slimeCells = [];
 function setup(){
-	createCanvas(630,630);
+	createCanvas(600,600);
 	this.w = 30;
 	this.cols = floor(width / w);
 	this.rows = floor(height / w);

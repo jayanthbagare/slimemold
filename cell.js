@@ -10,15 +10,15 @@ class Cell{
 	}
 
 	show = function(){
-		if(this.isPopulatedWithFood){
+		if(this.isPopulatedWithFood && !this.isPopulatedWithSlime){
 			this.food.update(this);
 			this.food.show();	
 		}
-		
+		// /!this.isPopulatedWithFood
 		if(this.isPopulatedWithSlime){
 			this.slime.checkDistanceFromFoodAndStop();
 			this.slime.show();
-			
+			console.log(slimeCells);
 		}
 	}
 
@@ -26,7 +26,7 @@ class Cell{
 		if(this.constructor.name == "Cell" && this.isPopulatedWithFood == false){
 			this.food = new Food(this.x,this.y,this.w);
 			this.isPopulatedWithFood = true;
-			foodCells.push(this);
+			foodCells.push(this.food);
 		}
 	}
 
@@ -34,6 +34,7 @@ class Cell{
 		if(this.constructor.name == "Cell" && this.isPopulatedWithSlime == false){
 			this.slime = new Slime(this.x,this.y,this.w);
 			this.isPopulatedWithSlime = true;
+			slimeCells.push(this.slime);
 		}	
 	}
 }
