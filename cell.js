@@ -18,7 +18,6 @@ class Cell{
 		if(this.isPopulatedWithSlime){
 			this.slime.checkDistanceFromFoodAndStop();
 			this.slime.show();
-			console.log(slimeCells);
 		}
 	}
 
